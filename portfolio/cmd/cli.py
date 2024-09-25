@@ -13,18 +13,15 @@
 #  limitations under the License.
 #
 import argparse
-import logging
 
-from portfolio.templates import about
-from portfolio.templates import certificates
-from portfolio.templates import education
-from portfolio.templates import experience
-from portfolio.templates import help
-from portfolio.templates import social
-
-logging.basicConfig(level=logging.INFO)
-
-LOG = logging.getLogger(__name__)
+from portfolio.templates import (
+    about,
+    certificates,
+    education,
+    experience,
+    help,
+    social,
+)
 
 templates = {
     "about": about,
@@ -39,13 +36,16 @@ HELP = help.TEMPLATE % {
     "experience": experience.HELP,
     "certificates": certificates.HELP,
     "social": social.HELP,
-    "education": education.HELP
+    "education": education.HELP,
 }
 
 parser = argparse.ArgumentParser(
     description="Portfolio CLI <daipham.3213@gmail.com>",
-    prog="portfolio", usage="%(prog)s [options]", epilog="Enjoy the CLI!",
-    formatter_class=argparse.RawTextHelpFormatter, add_help=True
+    prog="portfolio",
+    usage="%(prog)s [options]",
+    epilog="Enjoy the CLI!",
+    formatter_class=argparse.RawTextHelpFormatter,
+    add_help=True,
 )
 parser.add_argument("option", type=str, choices=templates.keys(), help=HELP)
 
@@ -55,4 +55,4 @@ def main():
     option = templates[args.option]
 
     template = option.TEMPLATE
-    LOG.info(template)
+    print(template)
