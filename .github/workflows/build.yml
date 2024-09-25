@@ -1,0 +1,32 @@
+name: build portfolio.cli
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+  pull_request:
+  workflow_call:
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: chartboost/ruff-action@v1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build binary
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 -o output .
+      - name : Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: portfolio.cli
+          path: ./output
