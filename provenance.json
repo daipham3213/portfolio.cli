@@ -1,0 +1,706 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "name": "me.wasm",
+      "digest": {
+        "sha256": "b1c12db83f7a8834316b39966cd31d788a0bc2ca08885a8bc8ff6d69e43685f5"
+      }
+    }
+  ],
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/daipham3213/portfolio.cli/actions/runs/11072947572/attempts/1"
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/python@3.11?platform=linux%2Famd64",
+        "digest": {
+          "sha256": "ff08dd71f2c87a990c292cf1f7dcb995e22cc9dbeab8c3ed5426521caa8451e8"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "entryPoint": "Dockerfile"
+      },
+      "parameters": {
+        "frontend": "dockerfile.v0",
+        "locals": [
+          {
+            "name": "context"
+          },
+          {
+            "name": "dockerfile"
+          }
+        ]
+      },
+      "environment": {
+        "platform": "linux/amd64"
+      }
+    },
+    "buildConfig": {
+      "llbDefinition": [
+        {
+          "id": "step0",
+          "op": {
+            "Op": {
+              "source": {
+                "identifier": "docker-image://docker.io/library/python:3.11@sha256:ff08dd71f2c87a990c292cf1f7dcb995e22cc9dbeab8c3ed5426521caa8451e8"
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          }
+        },
+        {
+          "id": "step1",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": -1,
+                    "output": 0,
+                    "Action": {
+                      "mkdir": {
+                        "path": "/app/portfolio",
+                        "mode": 493,
+                        "makeParents": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step0:0"
+          ]
+        },
+        {
+          "id": "step2",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "apt update \u0026\u0026 apt install -y gcc libpython3.11-dev curl patchelf git"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step1:0"
+          ]
+        },
+        {
+          "id": "step3",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "pip install py2wasm"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step2:0"
+          ]
+        },
+        {
+          "id": "step4",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "py2wasm 2\u003e\u00261 \u003e /dev/null || echo \"py2wasm is ready\""
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step3:0"
+          ]
+        },
+        {
+          "id": "step5",
+          "op": {
+            "Op": {
+              "source": {
+                "identifier": "local://context",
+                "attrs": {
+                  "local.excludepatterns": "[\"__pycache__\",\"*.py[cod]\",\"*$py.class\",\"*.so\",\".Python\",\"build\",\"develop-eggs\",\"dist\",\"downloads\",\"eggs\",\".eggs\",\"lib\",\"lib64\",\"parts\",\"sdist\",\"var\",\"wheels\",\"share/python-wheels\",\"*.egg-info\",\".installed.cfg\",\"*.egg\",\"MANIFEST\",\"*.manifest\",\"*.spec\",\"pip-log.txt\",\"pip-delete-this-directory.txt\",\"htmlcov\",\".tox\",\".nox\",\".coverage\",\".coverage.*\",\".cache\",\"nosetests.xml\",\"coverage.xml\",\"*.cover\",\"*.py,cover\",\".hypothesis\",\".pytest_cache\",\"cover\",\"*.mo\",\"*.pot\",\"*.log\",\"local_settings.py\",\"db.sqlite3\",\"db.sqlite3-journal\",\"instance\",\".webassets-cache\",\".scrapy\",\"docs/_build\",\".pybuilder\",\"target\",\".ipynb_checkpoints\",\"profile_default\",\"ipython_config.py\",\".pdm.toml\",\"__pypackages__\",\"celerybeat-schedule\",\"celerybeat.pid\",\"*.sage.py\",\".env\",\".venv\",\"env\",\"venv\",\"ENV\",\"env.bak\",\"venv.bak\",\".spyderproject\",\".spyproject\",\".ropeproject\",\"site\",\".mypy_cache\",\".dmypy.json\",\"dmypy.json\",\".pyre\",\".pytype\",\"cython_debug\",\".idea\"]",
+                  "local.sharedkeyhint": "context"
+                }
+              }
+            },
+            "constraints": {}
+          }
+        },
+        {
+          "id": "step6",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": 1,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/",
+                        "dest": "/app/portfolio/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step4:0",
+            "step5:0"
+          ]
+        },
+        {
+          "id": "step7",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "pip install ."
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step6:0"
+          ]
+        },
+        {
+          "id": "step8",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "mkdir -p \"$OUTPUT_DIR\""
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step7:0"
+          ]
+        },
+        {
+          "id": "step9",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "py2wasm $(which me) --output \"$OUTPUT_DIR/me.wasm\""
+                  ],
+                  "env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.10",
+                    "DEBIAN_FRONTEND=noninteractive",
+                    "OUTPUT_DIR=/output"
+                  ],
+                  "cwd": "/app/portfolio",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "input": 0,
+                    "dest": "/",
+                    "output": 0
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step8:0"
+          ]
+        },
+        {
+          "id": "step10",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": -1,
+                    "secondaryInput": 0,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/output/me.wasm",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step9:0"
+          ]
+        },
+        {
+          "id": "step11",
+          "op": {
+            "Op": null
+          },
+          "inputs": [
+            "step10:0"
+          ]
+        }
+      ],
+      "digestMapping": {
+        "sha256:200da97a8e3f3c62a5bbb27d6a3076600f805ab79bd98fc1c730f2e0b9423bfe": "step11",
+        "sha256:385a4139d95a0e6356b5bc1b8ec032292b2d3c34fd6299ca8370b70283aa449b": "step1",
+        "sha256:3c7184c5c56fec8ec62fef41d7676a416ac7f41472d8e27538b4ca3695dc9dd8": "step10",
+        "sha256:4aae1a8f7c0d7ada5458b71c4b83c48914a6a4951a5f31ef28d129d866489133": "step8",
+        "sha256:7113a021bac61c7bdf228b0c7ca43c5b9616bac49a20636901b32342f18ef035": "step9",
+        "sha256:9684cabc79082f49c2204198833dad74e8e9c163ae210ce17fede7ca3885d6c1": "step7",
+        "sha256:a5e354f6e9df96a5108de71aa2f451b503d5d374e508e2b0f0a4680d69555c7f": "step2",
+        "sha256:a7f1844dcb83d7bec134e5e60ae9b59d609daf78de0608fd1d086ae40e8157ad": "step5",
+        "sha256:b468a1b9938f5bc833e6231a93ff11957080ea16a0479a1cbe9fa8fdc1f7022b": "step3",
+        "sha256:b4fbe88cb27906c92281586a0ef593491bd397fa88959217f29b3a70be701585": "step6",
+        "sha256:bf41e812cbce2448ba95902b0ce0e30dd65c6262bd510386767decd0d6b35675": "step4",
+        "sha256:d76dcd95fff03e34a8b9d37bf1c02287ee46a3d2c8f62d656cf673252c52a56d": "step0"
+      }
+    },
+    "metadata": {
+      "buildInvocationID": "3vukwo4polijsccalssd8hz0x",
+      "buildStartedOn": "2024-09-27T14:59:32.068533639Z",
+      "buildFinishedOn": "2024-09-27T15:02:02.343461713Z",
+      "completeness": {
+        "parameters": true,
+        "environment": true,
+        "materials": false
+      },
+      "reproducible": false,
+      "https://mobyproject.org/buildkit@v1#metadata": {
+        "vcs": {
+          "localdir:context": ".",
+          "localdir:dockerfile": ".",
+          "revision": "a0bac64743bd9dcb50dbf12eaa768edba1c46b39",
+          "source": "https://github.com/daipham3213/portfolio.cli"
+        },
+        "source": {
+          "locations": {
+            "step0": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 1
+                      },
+                      "end": {
+                        "line": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step1": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 3
+                      },
+                      "end": {
+                        "line": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step10": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 22
+                      },
+                      "end": {
+                        "line": 22
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step2": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 8
+                      },
+                      "end": {
+                        "line": 8
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step3": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 10
+                      },
+                      "end": {
+                        "line": 10
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step4": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 11
+                      },
+                      "end": {
+                        "line": 11
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step5": {},
+            "step6": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 13
+                      },
+                      "end": {
+                        "line": 13
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step7": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 14
+                      },
+                      "end": {
+                        "line": 14
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step8": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 16
+                      },
+                      "end": {
+                        "line": 16
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step9": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 17
+                      },
+                      "end": {
+                        "line": 17
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "infos": [
+            {
+              "filename": "Dockerfile",
+              "language": "Dockerfile",
+              "data": "RlJPTSBweXRob246My4xMSBhcyBidWlsZA0KDQpXT1JLRElSIC9hcHAvcG9ydGZvbGlvDQoNCkFSRyBERUJJQU5fRlJPTlRFTkQ9bm9uaW50ZXJhY3RpdmUNCkFSRyBPVVRQVVRfRElSPS9vdXRwdXQNCg0KUlVOIGFwdCB1cGRhdGUgJiYgYXB0IGluc3RhbGwgLXkgZ2NjIGxpYnB5dGhvbjMuMTEtZGV2IGN1cmwgcGF0Y2hlbGYgZ2l0DQoNClJVTiBwaXAgaW5zdGFsbCBweTJ3YXNtDQpSVU4gcHkyd2FzbSAyPiYxID4gL2Rldi9udWxsIHx8IGVjaG8gInB5Mndhc20gaXMgcmVhZHkiDQoNCkNPUFkgLiAuDQpSVU4gcGlwIGluc3RhbGwgLg0KDQpSVU4gbWtkaXIgLXAgIiRPVVRQVVRfRElSIg0KUlVOIHB5Mndhc20gJCh3aGljaCBtZSkgLS1vdXRwdXQgIiRPVVRQVVRfRElSL21lLndhc20iDQoNCkZST00gc2NyYXRjaA0KQVJHIE9VVFBVVF9ESVI9L291dHB1dA0KDQpDT1BZIC0tZnJvbT1idWlsZCAiJE9VVFBVVF9ESVIvbWUud2FzbSIgLw0KDQpFTlRSWVBPSU5UIFsiL21lLndhc20iXQ0K",
+              "llbDefinition": [
+                {
+                  "id": "step0",
+                  "op": {
+                    "Op": {
+                      "source": {
+                        "identifier": "local://dockerfile",
+                        "attrs": {
+                          "local.differ": "none",
+                          "local.followpaths": "[\"Dockerfile\",\"Dockerfile.dockerignore\",\"dockerfile\"]",
+                          "local.sharedkeyhint": "dockerfile"
+                        }
+                      }
+                    },
+                    "constraints": {}
+                  }
+                },
+                {
+                  "id": "step1",
+                  "op": {
+                    "Op": null
+                  },
+                  "inputs": [
+                    "step0:0"
+                  ]
+                }
+              ],
+              "digestMapping": {
+                "sha256:5e770bf1e82bb961b6a058a2b153469eaaa74aca6fd84461bdba9da2fa3458dd": "step0",
+                "sha256:67ca5a6ef6defabfbb70a389f3d8b2558717b30ea59263b186dce99f730e80c1": "step1"
+              }
+            }
+          ]
+        },
+        "layers": {
+          "step0:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cdd62bf39133c498a16f7a7b1b6555ba43d02b2511c508fa4c0a9b1975ffe20e",
+                "size": 49555051
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:a47cff7f31e941e78bf63ca19f0811b675283e2c00ddea10c57f78d93b2bc343",
+                "size": 24053049
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:a173f2aee8e962ea19db1e418ae84a0c9f71480b51f768a19332dfa83d7722a5",
+                "size": 64392323
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:01272fe8adbacc44afd2b92994b31c40a151f4324ca392050d9e8d580927dd32",
+                "size": 211265642
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:3abb900560fd4b2f544085a14ae23063f00b79f4fce4bcf3bccc345baf23d4b8",
+                "size": 6161593
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:d870c456a0c1e28e12c84f56f9f1ca12fefc502d49fa5c20512d1335df5f072c",
+                "size": 22970106
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:3e89315f332631160a54f2bf8880d49819a29519fa2efdbd86d0740a82ff7579",
+                "size": 249
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}
