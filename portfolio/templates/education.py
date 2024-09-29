@@ -14,7 +14,7 @@
 #
 
 TEMPLATE = """
-My education background:
+EDUCATION:
 
 Ho Chi Minh City University of Technology
 Software Engineering | 2018 - 2022

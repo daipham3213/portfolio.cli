@@ -15,8 +15,14 @@
 """This template stores information about my certificates and awards."""
 
 TEMPLATE = """
-Some of my certificates and awards include:
-<empty-ness>
+CERTIFICATES:
+
+- Certified Kubernetes for application developers (CKAD) | 2024
+
+NOMINATIONS:
+
+- OpenStack Caracal Contributor - Pham Le Gia Dai | https://shorturl.at/aEL7v
+- Distributed tracing for microservices in OpenStack | https://shorturl.at/TKnaL
 """
 
 HELP = "tells you about my certificates and awards."
