@@ -38,10 +38,9 @@ HELP = help.TEMPLATE % {
     "social": social.HELP,
     "education": education.HELP,
 }
-
 parser = argparse.ArgumentParser(
     description="Portfolio CLI <daipham.3213@gmail.com>",
-    prog="portfolio",
+    prog="me",
     usage="%(prog)s [options]",
     epilog="Enjoy the CLI!",
     formatter_class=argparse.RawTextHelpFormatter,
